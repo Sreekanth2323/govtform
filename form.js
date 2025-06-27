@@ -1,6 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Inline Validation
+  
   const fullname = document.getElementById("fullname");
   const fullnameError = document.getElementById("fullnameError");
 
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Gender Toggle
+
   const gender = document.getElementById("gender");
   const otherGenderField = document.getElementById("otherGenderField");
 
@@ -49,3 +49,64 @@ const zipData = {
     charCountDisplay.textContent = this.value.length;
   });
 
+    const steps = document.querySelectorAll(".step");
+    const progress = document.getElementById("progress");
+    const nextBtn = document.getElementById("nextBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const form = document.getElementById("govForm");
+    let currentStep = 0;
+
+    const showStep = (index) => {
+      steps.forEach((step, i) => step.style.display = i === index ? "block" : "none");
+      progress.style.width = ((index + 1) / steps.length) * 100 + "%";
+      prevBtn.style.display = index === 0 ? "none" : "inline-block";
+      nextBtn.textContent = index === steps.length - 1 ? "Submit" : "Next";
+    };
+
+    nextBtn.addEventListener("click", () => {
+      if (currentStep < steps.length - 1) {
+        currentStep++;
+        showStep(currentStep);
+      } else {
+        form.submit();
+      }
+    });
+
+    prevBtn.addEventListener("click", () => {
+      if (currentStep > 0) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    });
+
+    document.getElementById("gender").addEventListener("change", function () {
+      document.getElementById("otherGenderField").style.display = this.value === "other" ? "block" : "none";
+    });
+
+    const address = document.getElementById("address");
+    const charCount = document.getElementById("charCount");
+    address.addEventListener("input", () => {
+      charCount.textContent = address.value.length;
+    });
+
+    // Auto save and load
+    const saveData = () => {
+      const data = new FormData(form);
+      const json = {};
+      data.forEach((value, key) => json[key] = value);
+      localStorage.setItem("govFormData", JSON.stringify(json));
+    };
+
+    const loadData = () => {
+      const saved = JSON.parse(localStorage.getItem("govFormData"));
+      if (!saved) return;
+      Object.keys(saved).forEach(key => {
+        if (form[key]) form[key].value = saved[key];
+      });
+    };
+
+    setInterval(saveData, 3000); // Save every 3 seconds
+    document.addEventListener("DOMContentLoaded", () => {
+      loadData();
+      showStep(currentStep);
+    });

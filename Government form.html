@@ -1,75 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <link rel="stylesheet" href="form.css">
-        <title>Government form</title>
-    </head>
-    <body>
-        <header>
-            <h1>Government Form</h1>
-        </header>
-        <main>
-            <form action="#" method="post" enctype="multipart/form-data" aria-labelledby="form-title">
-            <fieldset>
-                <label for="fullname">Fullname:</label>
-                <input type="text" id="fullname" required/>
-                <span class="error" id="fullnameError"></span>
-             </fieldset>
-             <fieldset>   
-                <label for="dob">Date of Birth:</label>
-                <input type="date" id="dob" name="dob" required aria-required="true">
-            </fieldset>
-            <fieldset>
-                <label for="gender">Gender:</label>
-                <select id="gender" name="gender" required aria-required="true">
-                <option value="">--Select--</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-                </select>
-                </fieldset>
-                <fieldset id="otherGenderField" style="display: none;">
-                <label for="specifyGender">Please specify:</label>
-                <input type="text" id="specifyGender" name="specifyGender" />
-                </fieldset>
-            <fieldset>
-                <label>National Id Card:</label>
-                <input type="number"/>
-            </fieldset>
-            <fieldset>  
-                <label>File Upload:</label>
-                <input type="file"/>
-            </fieldset>
-             <fieldset>
-                <label>Address:</label>
-                <textarea id="address" name="address" rows="4" cols="50" required aria-required="true" maxlength="200"></textarea>
-                <small><span id="charCount">0</span>/200 characters</small>
-            </fieldset>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="form.css" />
+  <title>Government Form</title>
+</head>
+<body>
+  <header>
+    <h1>Government Form</h1>
+  </header>
 
-             <fieldset>
-                 <label for="zipcode">Zip Code:</label>
-                 <input type="text" id="zipcode" maxlength="6" />
-                </fieldset>
-                
-                <fieldset>
-                    <label for="city">City:</label>
-                    <input type="text" id="city" readonly />
-                </fieldset>
-                
-                <fieldset>
-                    <label for="state">State:</label>
-                    <input type="text" id="state" readonly />
-                </fieldset>
-                <fieldset>
-                   <input type="checkbox" id="terms" name="terms" required aria-required="true"/>
-                   <label for="terms">I agree to the terms and conditions</label>
-               </fieldset>   
- 
-                
-            <button type="submit"> Submit</button>    
-            <button type="reset"> Reset</button>
-        </form> 
-        <script src="./form.js"></script>
-        </main>
-    </body>
+  <main>
+    <div class="progress-bar">
+      <div id="progress"></div>
+    </div>
+
+    <form id="govForm" action="#" method="post">
+      <div class="step">
+        <fieldset>
+          <label for="fullname">Fullname:</label>
+          <input type="text" id="fullname" name="fullname" required />
+        </fieldset>
+        <fieldset>
+          <label for="dob">Date of Birth:</label>
+          <input type="date" id="dob" name="dob" required />
+        </fieldset>
+        <fieldset>
+          <label for="gender">Gender:</label>
+          <select id="gender" name="gender" required>
+            <option value="">--Select--</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </fieldset>
+        <fieldset id="otherGenderField" style="display: none;">
+          <label for="specifyGender">Please specify:</label>
+          <input type="text" id="specifyGender" name="specifyGender" />
+        </fieldset>
+      </div>
+
+      <div class="step">
+        <fieldset>
+          <label>National Id Card:</label>
+          <input type="number" name="nid" />
+        </fieldset>
+        <fieldset>
+          <label>File Upload:</label>
+          <input type="file" name="document" />
+        </fieldset>
+        <fieldset>
+          <label>Address:</label>
+          <textarea id="address" name="address" maxlength="200" required></textarea>
+          <small><span id="charCount">0</span>/200 characters</small>
+        </fieldset>
+      </div>
+
+      <div class="step">
+        <fieldset>
+          <label for="zipcode">Zip Code:</label>
+          <input type="text" id="zipcode" name="zipcode" maxlength="6" />
+        </fieldset>
+        <fieldset>
+          <label for="city">City:</label>
+          <input type="text" id="city" name="city" readonly />
+        </fieldset>
+        <fieldset>
+          <label for="state">State:</label>
+          <input type="text" id="state" name="state" readonly />
+        </fieldset>
+        <fieldset>
+          <input type="checkbox" id="terms" name="terms" required />
+          <label for="terms">I agree to the terms and conditions</label>
+        </fieldset>
+      </div>
+
+      <div class="form-navigation">
+        <button id="prevBtn" type="button">Previous</button>
+        <button id="nextBtn" type="button">Next</button>
+      </div>
+    </form>
+  </main>
+  <script src="./form.js"></script>
+
+</body>
 </html>
